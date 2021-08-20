@@ -1,32 +1,24 @@
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.keys import Keys
+from app import Application
 
 
 def test_search_something():
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    app = Application()
     try:
-        driver.get("https://www.google.com/")
-        search_input = driver.find_element_by_name("q")
-        search_input.clear()
-        search_input.send_keys("python")
-        search_input.send_keys(Keys.ENTER)
-        assert "python" in driver.page_source
+        app.main_page.open_page()
+        app.main_page.search("python")
+        assert "python" in app.main_page.get_page_source()
     finally:
-        driver.quit()
+        app.main_page.quit()
 
 
 def test_search_nothing():
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    app = Application()
     try:
-        driver.get("https://www.google.com/")
-        search_input = driver.find_element_by_name("q")
-        search_input.clear()
-        search_input.send_keys("")
-        search_input.send_keys(Keys.ENTER)
-        assert driver.current_url == "https://www.google.com/"
+        app.main_page.open_page()
+        app.main_page.search("")
+        assert "https://www.google.com/" == app.main_page.current_url
     finally:
-        driver.quit()
+        app.main_page.quit()
 
 
 test_search_something()

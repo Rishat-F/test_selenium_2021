@@ -1,2 +1,7 @@
-# test_selenium_2021
-Testing google.com search
+
+# Page Object Model + pytest
+
+
+В данном репозитории показан переход от плохой практики тестировная web-приложений<br>
+к стандарту тестирования при помощи паттерна "Page Object Model + pytest"<br>
+(каждый этап закреплен своим коммитом)
